@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO with TypeScript</title>
+</head>
+<body>
+  <h1>Socket.IO Notifications</h1>
+  <input type="text" id="message" placeholder="Enter a message" />
+  <button onclick="sendNotification()">Send Notification</button>
+
+  <button id="sendBtn">Send Notification</button>
+
+  <div id="notifications"></div>
+
+  <!-- Include the compiled client-side JavaScript -->
+  <!-- <script type="/module" src="/dist/client.js">
+      <!-- document.getElementById('sendBtn').onclick = sendNotification; -->
+
+  </script> -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+      const socket = io();
+      const form = document.getElementById('form');
+      const input = document.getElementById('input');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (input.value) {
+          socket.emit('chat message', input.value);
+          input.value = '';
+        }
+      });
+  </script>
+</body>
+</html>
